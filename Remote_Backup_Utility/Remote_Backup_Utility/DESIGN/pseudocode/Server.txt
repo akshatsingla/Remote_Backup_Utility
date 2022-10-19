@@ -1,0 +1,50 @@
+Pseudocode for TCP Server
+
+-------------------------------------------------------------
+INCLUDE HEADER.H
+
+DEFINE PORT 4455
+DEFINE SIZE 1000
+
+-------------------------Main Function------------------------
+BEGIN
+
+Create socket (serverSocket)
+
+IF (SOCKFD<0)
+    PRINT "ERROR IN SERVER CREATION"
+ELSE
+    PRINT "SERVER CREATED SUCCESSFULLY"
+Bind socket to a specific port where clients can contact you
+Register with the kernel your willingness to listen that on socket for client to contact you
+
+Loop
+       Accept new connection (newSocket)
+       Read and Write data into newSocket to communicate with client
+       Close newSocket
+End Loop
+Close serverSocket
+----------------------------------------------------------------
+
+------------------------Function Definitions---------------------
+
+FUNCTION WRITE_FILE
+PASS IN: INTEGER SOCKFD
+PASS OUT: NOTHING
+
+DEFINE INTEGER N
+DEFINE FILE POINTER *fp
+TAKE FILE FOR BACKUP FROM "../Backup/File.txt"
+DEFINE CHAR BUFFER[SIZE]
+
+OPEN FILE IN WRITE MODE
+
+INFINITE WHILE LOOP
+  N = RECV (SOCKFD,BUFFER,SIZE,0)
+  IF N IS LESS THAN OR EQUAL TO 0
+  BREAK
+  RETURN
+LOOP ENDS
+PRINT IN FILE
+CLOSE FILE
+FUNCTION ENDS
